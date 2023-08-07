@@ -28,6 +28,25 @@ ITStatus SPI_I2S_GetITStatus(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT);//检查指�
 void SPI_I2S_ClearITPendingBit(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT);//清除指定的SPI/I2S中断标志位
 */
 
+//以下函数为对引脚操作的封装和改名，方便移植
+void SPI_SS(uint8_t BitValue)//写SS引脚电平
+{
+    GPIO_WriteBit(GPIOA, GPIO_Pin_4, (BitAction)BitValue);
+}
+
+
+//以下为SPI的三种基本条件：起始条件、终止条件、交换一个字节（模式0）
+
+void SPI_Start(void)//硬件SPI起始条件
+{
+    SPI_SS(0);//SS引脚拉低
+}
+
+void SPI_Stop(void)//硬件SPI终止条件
+{
+    SPI_SS(1);//SS引脚拉高
+}
+
 void SPI_Initilize(void)
 {
     /*
@@ -49,12 +68,19 @@ void SPI_Initilize(void)
     //1.初始化GPIO配置
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);//使能GPIOA时钟
     GPIO_InitTypeDef GPIO_InitStructure;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_7;//PA4~7
+
+    GPIO_InitStructure.GPIO_Pin =GPIO_Pin_5 | GPIO_Pin_7;//PA5~7
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;//复用推挽输出
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//50MHz
+    GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIOA
+
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4; //PA4
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;//通用推挽输出
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//50MHz
+    GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIOA
+
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;//PA6
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;//浮空输入
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;//上拉输入
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//50MHz
     GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIOA
     //2.初始化SPI配置
@@ -64,40 +90,19 @@ void SPI_Initilize(void)
     SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;//NSS软件管理
     SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;//双线全双工
     SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;//数据传输从MSB位开始
-    SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge ;//第一个时钟沿捕获数据
-    SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;//时钟空闲状态为高电平
+    SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge ;//第一个时钟沿捕获数据,CPHA=0
+    SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;//时钟空闲状态为低电平
     SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_32;//波特率预分频值为32
     SPI_InitStructure.SPI_CRCPolynomial = 7;//CRC多项式寄存器值为7
     SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;//数据大小为8位
     SPI_Init(SPI1, &SPI_InitStructure);//初始化SPI1
     SPI_Cmd(SPI1, ENABLE);//使能SPI1
+    SPI_SS(1);//SS引脚置高电平，SPI总线空闲状态。默认不选中从机
 }
 
-//以下函数为对引脚操作的封装和改名，方便移植
-void SPI_SS(uint8_t BitValue)//写SS引脚电平
+uint8_t SPI_ExchangeByte(uint8_t TxData)//硬件交换一个字长数据；连续传输；模式0
 {
-    GPIO_WriteBit(GPIOA, GPIO_Pin_4, (BitAction)BitValue);
-}
-
-
-//以下为SPI的三种基本条件：起始条件、终止条件、交换一个字节（模式0）
-
-void SPI_Start(void)//硬件SPI起始条件
-{
-    SPI_SS(0);//SS引脚拉低
-}
-
-void SPI_Stop(void)//硬件SPI终止条件
-{
-    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_BSY) == RESET)
-    {
-        SPI_SS(1);//SS引脚拉高
-    }
-}
-
-uint32_t SPI_ExchangeWord(uint32_t TxData)//硬件交换一个字长数据；连续传输；模式3
-{
-    /*
+    /*软件实现
     uint8_t i;
     for(i=0;i<8;i++)
     {
@@ -116,19 +121,19 @@ uint32_t SPI_ExchangeWord(uint32_t TxData)//硬件交换一个字长数据；连
             TxData |= 0x01;
         SPI_SCK(0);//SCK引脚拉低
     }
-
     uint8_t temp,RxData;
-    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) == SET);//等待发送缓冲区空
+    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) != SET);//等待发送缓冲区空
     SPI_I2S_SendData(SPI1, TxData);//发送数据
-    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_RXNE) == RESET);//等待接收缓冲区非空
+    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_RXNE) != RESET);//等待接收缓冲区非空
     temp = SPI_I2S_ReceiveData(SPI1);//读取数据
-    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) == SET);//等待发送缓冲区空
+    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) != SET);//等待发送缓冲区空
     SPI_I2S_SendData(SPI1, 0xFF);//发送数据
-    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_RXNE) == RESET);//等待接收缓冲区非空
+    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_RXNE) != RESET);//等待接收缓冲区非空
     RxData = SPI_I2S_ReceiveData(SPI1);//读取数据
     return RxData;
-
     */
+
+    /*硬件实现，连续传输
     uint32_t RxData;
     uint8_t TxDataArray[5];
     TxDataArray[0] = (TxData >> 24) & 0xFF;
@@ -139,11 +144,18 @@ uint32_t SPI_ExchangeWord(uint32_t TxData)//硬件交换一个字长数据；连
     SPI_I2S_SendData(SPI1, TxDataArray[0]);//发送数据
     for(int i =1;i<5;i++)
     {
-        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) == SET);//等待发送缓冲区空
+        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) != SET);//等待发送缓冲区空
         SPI_I2S_SendData(SPI1, TxDataArray[i]);//发送数据
-        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_RXNE) == SET);//等待接收缓冲区非空
+        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_RXNE) != SET);//等待接收缓冲区非空
         RxData |= SPI_I2S_ReceiveData(SPI1);//读取数据
         RxData <<= 8;
     }
     return RxData;
+    */
+
+    //硬件实现，非连续传输
+    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) != SET);//等待发送缓冲区空。写入DR会顺便清除TXE标志
+    SPI_I2S_SendData(SPI1, TxData);//发送数据
+    while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_RXNE) != SET);//等待接收缓冲区非空。要想接收必须得先发送
+    return SPI_I2S_ReceiveData(SPI1);//读取数据
 }

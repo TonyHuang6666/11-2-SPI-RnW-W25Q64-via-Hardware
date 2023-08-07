@@ -470,7 +470,7 @@ void SPI_I2S_ClearITPendingBit(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT);
 void SPI_I2S_DeInit(SPI_TypeDef* SPIx);//复位SPI/I2S外设
 void SPI_Init(SPI_TypeDef* SPIx, SPI_InitTypeDef* SPI_InitStruct);//初始化SPI外设
 void SPI_StructInit(SPI_InitTypeDef* SPI_InitStruct);//SPI外设初始化结构体
-void SPI_Cmd(SPI_TypeDef* SPIx, FunctionalState NewState);
+void SPI_Cmd(SPI_TypeDef* SPIx, FunctionalState NewState);//使能或者失能SPI外设
 void SPI_I2S_ITConfig(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT, FunctionalState NewState);//使能或者失能指定的SPI/I2S中断
 void SPI_I2S_DMACmd(SPI_TypeDef* SPIx, uint16_t SPI_I2S_DMAReq, FunctionalState NewState);//使能或者失能指定的SPI/I2S DMA请求
 

@@ -1,5 +1,42 @@
 # ninja log v5
-1	70	0	CMakeFiles/database	a0b568edbcdcf1
-1	70	0	D:/OneDrive - email.szu.edu.cn/Codes/Github insiders/Examples/11-2 SPI RnW W25Q64 via Hardware/tmp/Project/Target_1/CMakeFiles/database	a0b568edbcdcf1
+315	891	7131108971308351	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_usart.o	2fd96650c00f0682
 1	171	0	CMakeFiles/database	a0b568edbcdcf1
+5	405	7131107584032817	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Start/startup_stm32f10x_md.o	8d186ab5dc45ef2a
+10	270	7131108399339399	CMakeFiles/Project.dir/1b1ce569632f170942f38e1cbfe1967d/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/W25Q64.o	3d9d96993aa21361
+19	531	7131107585132399	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/Key.o	dd72cbefe03f44c5
 1	171	0	D:/OneDrive - email.szu.edu.cn/Codes/Github insiders/Examples/11-2 SPI RnW W25Q64 via Hardware/tmp/Project/Target_1/CMakeFiles/database	a0b568edbcdcf1
+87	591	7131107586683968	CMakeFiles/Project.dir/1b1ce569632f170942f38e1cbfe1967d/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/OLED.o	1d56f4f965ac51b8
+12	374	7131107584163440	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/LED.o	e160c444022380b8
+45	533	7131107585614781	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/IIC.o	a07c6b8a72f42c
+61	362	7131108400336505	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_exti.o	b99693070f27b9ff
+31	566	7131107585976972	CMakeFiles/Project.dir/1b1ce569632f170942f38e1cbfe1967d/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/MPU6050.o	a7b8420786909c8c
+45	343	7131108087705635	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_crc.o	f0b13d0c07669567
+375	699	7131107587757153	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/misc.o	29c5d1d3293dd1a0
+406	740	7131107588265258	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_adc.o	d83848fdd4f57731
+16	294	7131108087150406	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_cec.o	a86986609d80733f
+400	922	7131108972038369	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/System/Delay.o	217e849a3f3d7ba3
+22	342	7131108087617720	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_bkp.o	886d455d5852e43e
+103	379	7131108088085477	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_dbgmcu.o	fceaa2a95d37cf88
+57	400	7131108088339988	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_dac.o	729aa9097b31725e
+37	453	7131108088817382	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_can.o	145ac134d205341f
+17	373	7131108400406516	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_dma.o	d69779dea303f73
+31	394	7131108400688220	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_gpio.o	7390f52aadd51a50
+42	416	7131108400880032	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_fsmc.o	6a592fb9605b6208
+70	444	7131108401176597	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_i2c.o	4e5f759c15cf7eef
+23	473	7131108401460363	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_flash.o	e093d7a42fee6145
+16	314	7131108965667152	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_pwr.o	5601629fd3545b2f
+10	323	7131108965787175	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_iwdg.o	c0bb8d0a423a00ff
+5	161	7131110181925403	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/SPI.o	ac57467d7d31c945
+37	399	7131108966337655	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_rtc.o	41d11616edf06cca
+29	426	7131108966523663	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_sdio.o	ecbdc6f38645e13
+22	523	7131108966732855	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_rcc.o	6808b2ee4e1ee9bc
+72	597	7131108968363231	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_wwdg.o	5167817d5cd55aab
+427	785	7131108970643052	CMakeFiles/Project.dir/1b1ce569632f170942f38e1cbfe1967d/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Start/core_cm3.o	18332fd36797ea00
+57	810	7131108970923138	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_tim.o	b13be49530f1857d
+324	912	7131108971663026	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Library/stm32f10x_spi.o	14e0f6019f66fdd8
+524	919	7131108972038369	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/User/main.o	c12684c61e3c3ee1
+380	1012	7131108972932878	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Start/system_stm32f10x.o	b7c23221c7022084
+598	1058	7131108973424903	CMakeFiles/Project.dir/71ca556ab2a76501f88f78fd13863f4e/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/User/stm32f10x_it.o	d7f6a2b294aeb956
+162	280	7131110183146887	D:/OneDrive - email.szu.edu.cn/Codes/Github insiders/Examples/11-2 SPI RnW W25Q64 via Hardware/out/Project/Target_1/Project.axf	ed3cd3357f89cfae
+5	159	7131110239286550	CMakeFiles/Project.dir/D_/OneDrive_-_email.szu.edu.cn/Codes/Github_insiders/Examples/11-2_SPI_RnW_W25Q64_via_Hardware/Hardware/SPI.o	ac57467d7d31c945
+160	272	7131110240435179	D:/OneDrive - email.szu.edu.cn/Codes/Github insiders/Examples/11-2 SPI RnW W25Q64 via Hardware/out/Project/Target_1/Project.axf	ed3cd3357f89cfae
