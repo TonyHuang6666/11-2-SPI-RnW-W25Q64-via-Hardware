@@ -51,9 +51,11 @@ void SPI_Initilize(void)
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_7;//PA4~7
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;//复用推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//50MHz
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4; //PA4
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;//通用推挽输出
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;//PA6
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;//浮空输入
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//50MHz
     GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIOA
     //2.初始化SPI配置
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);//使能SPI1时钟
@@ -85,7 +87,7 @@ void SPI_Start(void)//硬件SPI起始条件
     SPI_SS(0);//SS引脚拉低
 }
 
-void SPI_Stop(void)//终止条件
+void SPI_Stop(void)//硬件SPI终止条件
 {
     while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_BSY) == RESET)
     {
